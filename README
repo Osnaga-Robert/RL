@@ -1,4 +1,4 @@
-1 2 3
+Implementare Switch in python
 Pentru tabela de de comutare m-am folosit de pseudocod:
     am creat un dictionar in care am stocat legatura dintre adresa MAC si port
     daca adresa MAC a destinatiei este de tip unicast, verificam daca se afla in dictionar
