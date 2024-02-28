@@ -1,0 +1,30 @@
+1 2 3
+Pentru tabela de de comutare m-am folosit de pseudocod:
+    am creat un dictionar in care am stocat legatura dintre adresa MAC si port
+    daca adresa MAC a destinatiei este de tip unicast, verificam daca se afla in dictionar
+    in caz afirmativ o trimitem pe portul corespunzator
+    in caz contrar o trimitem pe toate porturile
+Pentru al doilea exercitiu, mai intai am adugat intr-un dictionare legatura dintre numele porturilor si VLAN-ul asociat
+    mai intai am verificat daca cadrul este de tip acces(are vlan_id = -1), caz in care verificam daca trebuie trimis
+    pe o interfata de tip trunk(caz in care audaugam tag-ul) sau de tip acces caz in care il trimitem asa cum este
+    in cazul in care vlan_id != -1 vom scaote tag-ul dupa care vom verifica daca trebuie trimis pe o interfata de tip
+    trunk(caz in care punem tag-ul) sau nu
+Pentru al treilea exercitiu m-am foloit de pseudocod:
+    am creat un dictionar in care am stocat tipul portului pe care ne aflam(BLOCKED sau DESIGNATED)
+    am facut initializarea confrom pseudocodului
+    pentru a trimite pachete la fiecare secunda am verificat mai intai daca noi suntem root-ul deoarece
+    numai el are voie(exceptie facand inceputul programului)
+    pentru structura BDPU m-am folosit doar de elementele de care aveam nevoie:
+        root_bridge_id - id-ul root-ului
+        sender_bridge_id - id-ul sender-ului
+        sender_path_cost - costul pana la sender
+    in cazul in care am primit un pachet de tip BDPU, mai intai extragem datele necesare dupa care am implementat
+    conform pseudocodului
+    daca am gasit un root_bridge mai mic atunci acesta devine si root_bridge-ul tuturor switch-urilor
+    daca este in starea blocked il vom debloca iar toate porturile care cu exceptia celui pe care am primit pachetul
+    vor fi blocate deoarece noi am aflat un cost mai mic, deci porturile respective vor fi scoase
+    in cazul in care root_bridge_id-ul nostru este acelasi cu cel pe care l-am prmit atunci verificam ca portul respectiv
+    sa fie deblocat
+    in cazul in care in care bridge_id-ul nostru este acelasi cu sender-ul pe care l-am trimis, blocam portul
+    iar la final, daca noi suntem root_bridge, ne vom debloca toate porturile
+    pentru a trimite un pachet BDPU am creat un buffer in care am pus datele necesare dupa care am trimis pachetul
